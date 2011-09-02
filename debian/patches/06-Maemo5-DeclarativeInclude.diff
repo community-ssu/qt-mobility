@@ -1,0 +1,84 @@
+commit 0f24eddbcc7d63e843f598ae0296cdfdf47d123f
+Author: Chris Adams <christopher.adams@nokia.com>
+Date:   Thu Jul 22 11:31:36 2010 +1000
+
+    Don't use imageprovider.h in declarative plugin due to source break
+    
+    This is basically the same as 35a460a533fdbbcb4bc1d2659aed37414fa3e985
+    but applied to the 1.0 branch.
+
+diff --git a/examples/qmlcontacts/contents/example.vcf b/examples/qmlcontacts/contents/example.vcf
+index 29c2326..6088fa8 100644
+--- a/examples/qmlcontacts/contents/example.vcf
++++ b/examples/qmlcontacts/contents/example.vcf
+@@ -69,6 +69,7 @@ VERSION:2.1
+ N:Edie;David;
+ FN:Mr. David Edie
+ ORG:Example;
++PHOTO:http://qt.nokia.com/logo.png
+ TITLE:Manager
+ NOTE:
+ TEL;WORK;VOICE:(07) 3245-2323
+diff --git a/plugins/declarative/contacts/contacts.pro b/plugins/declarative/contacts/contacts.pro
+index b5881e7..41ee9d9 100644
+--- a/plugins/declarative/contacts/contacts.pro
++++ b/plugins/declarative/contacts/contacts.pro
+@@ -31,16 +31,19 @@ qmldir.path +=  $$[QT_INSTALL_IMPORTS]/$$TARGETPATH
+ 
+ # Input
+ HEADERS += qmlcontactmodel.h \
+-           imageprovider.h \
+            qmlcontact.h \
+            qmlcontactdetail.h \
+            qmlcontactdetailfield.h
+ 
+ SOURCES += plugin.cpp \
+     qmlcontactmodel.cpp \
+-    imageprovider.cpp \
+     qmlcontact.cpp \
+     qmlcontactdetail.cpp \
+     qmlcontactdetailfield.cpp
+ 
++# Qt 4.7.0b2 and 4.7.0rc1 have a source break for declarativeimageprovider, so don't
++# compile them for now.
++# HEADERS += imageprovider.h
++# SOURCES += imageprovider.cpp
++
+ INSTALLS += target qmldir
+diff --git a/plugins/declarative/contacts/plugin.cpp b/plugins/declarative/contacts/plugin.cpp
+index c15cfb8..6e485b0 100644
+--- a/plugins/declarative/contacts/plugin.cpp
++++ b/plugins/declarative/contacts/plugin.cpp
+@@ -47,7 +47,8 @@
+ #include "qmlcontact.h"
+ #include "qmlcontactdetail.h"
+ #include "qmlcontactdetailfield.h"
+-#include "imageprovider.h"
++// Qt 4.7.0b2 and rc1 have a source break - turn off for now
++// #include "imageprovider.h"
+ 
+ QT_USE_NAMESPACE
+ 
+@@ -67,7 +68,7 @@ public:
+ 
+     void initializeEngine(QDeclarativeEngine *engine, const char *uri) {
+         Q_UNUSED(uri);
+-        engine->addImageProvider("thumbnail", new ContactThumbnailImageProvider);
++        //engine->addImageProvider("thumbnail", new ContactThumbnailImageProvider);//due to source break
+     }
+ };
+ 
+diff --git a/plugins/declarative/contacts/qmlcontactmodel.cpp b/plugins/declarative/contacts/qmlcontactmodel.cpp
+index f67b516..761331b 100644
+--- a/plugins/declarative/contacts/qmlcontactmodel.cpp
++++ b/plugins/declarative/contacts/qmlcontactmodel.cpp
+@@ -270,7 +270,8 @@ QVariant QMLContactModel::data(const QModelIndex &index, int role) const
+             return c.localId();
+         case AvatarRole:
+             //Just let the imager provider deal with it
+-            return QString("image://thumbnail/%1.%2").arg(manager()).arg(c.localId());
++            //return QString("image://thumbnail/%1.%2").arg(manager()).arg(c.localId()); //imageprovider.h
++            return c.detail<QContactAvatar>().imageUrl();
+         case Qt::DecorationRole:
+             {
+                 QContactThumbnail t = c.detail<QContactThumbnail>();

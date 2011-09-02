@@ -1,0 +1,41 @@
+commit 3761370d27a5d7ede85b78ef6aef7e5e4662cc12
+Author: Dmytro Poplavskiy <dmytro.poplavskiy@nokia.com>
+Date:   Mon Jun 7 15:14:38 2010 +1000
+
+    Fixed build without private headers installed.
+    
+    Replaced QFactoryLoader with QMediaPluginLoader in QAudioDeviceFactory.
+    
+    Task-number: QTMOBILITY-322
+
+diff --git a/src/multimedia/audio/qaudiodevicefactory.cpp b/src/multimedia/audio/qaudiodevicefactory.cpp
+index f0bc2f0..0de3c70 100644
+--- a/src/multimedia/audio/qaudiodevicefactory.cpp
++++ b/src/multimedia/audio/qaudiodevicefactory.cpp
+@@ -44,7 +44,7 @@
+ #include "qaudiosystem.h"
+ #include "qaudiosystemplugin.h"
+ 
+-#include <private/qfactoryloader_p.h>
++#include "qmediapluginloader_p.h"
+ #include "qaudiodevicefactory_p.h"
+ 
+ #ifndef QT_NO_AUDIO_BACKEND
+@@ -70,7 +70,7 @@
+ QT_BEGIN_NAMESPACE
+ 
+ #if !defined (QT_NO_LIBRARY) && !defined(QT_NO_SETTINGS)
+-Q_GLOBAL_STATIC_WITH_ARGS(QFactoryLoader, loader,
++Q_GLOBAL_STATIC_WITH_ARGS(QMediaPluginLoader, loader,
+         (QAudioSystemFactoryInterface_iid, QLatin1String("/audio"), Qt::CaseInsensitive))
+ #endif
+ 
+@@ -146,7 +146,7 @@ QList<QAudioDeviceInfo> QAudioDeviceFactory::availableDevices(QAudio::Mode mode)
+ #endif
+ 
+ #if !defined (QT_NO_LIBRARY) && !defined(QT_NO_SETTINGS)
+-    QFactoryLoader* l = loader();
++    QMediaPluginLoader* l = loader();
+ 
+     foreach (QString const& key, l->keys()) {
+         QAudioSystemFactoryInterface* plugin = qobject_cast<QAudioSystemFactoryInterface*>(l->instance(key));

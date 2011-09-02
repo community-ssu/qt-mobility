@@ -1,0 +1,4 @@
+opt/lib/libQtContacts.so.*
+usr/lib/libQtContacts.so.*
+usr/lib/qt4/plugins/contacts 
+opt/lib/qt4/plugins/contacts 

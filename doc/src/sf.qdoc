@@ -1,0 +1,468 @@
+/****************************************************************************
+**
+** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the Qt Mobility Components.
+**
+** $QT_BEGIN_LICENSE:LGPL$
+** Commercial Usage
+** Licensees holding valid Qt Commercial licenses may use this file in
+** accordance with the Qt Solutions Commercial License Agreement provided
+** with the Software or, alternatively, in accordance with the terms
+** contained in a written agreement between you and Nokia.
+**
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Nokia gives you certain additional
+** rights.  These rights are described in the Nokia Qt LGPL Exception
+** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
+**
+** Please note Third Party Software included with Qt Solutions may impose
+** additional restrictions and it is the user's responsibility to ensure
+** that they have met the licensing requirements of the GPL, LGPL, or Qt
+** Solutions Commercial license and the relevant license of the Third
+** Party Software they are using.
+**
+** If you are unsure which license is appropriate for your use, please
+** contact the sales department at qt-sales@nokia.com.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+    \group servicefw
+    \title Service Frameworks Classes
+
+    A set of APIs to that allows clients to discover and instantiate
+arbitrary services.
+
+*/
+
+
+/*!
+\page service-frameworks.html
+
+\title Qt Service Framework
+
+\brief A set of Qt APIs to that allows clients to discover and instantiate
+arbitrary services.
+
+\ingroup mobility
+
+The Qt Service Framework allows clients to discover and instantiate
+arbitrary services.
+
+
+\tableofcontents
+
+\section1 Namespace
+
+The QtMobility APIs are placed into the \i{QtMobility} namespace. This is done
+to facilitate the future migration of Mobility APIs into Qt. See the
+\l {Quickstart Example}{Quickstart guide} for an example on how the
+namespace impacts on application development.
+
+
+\section1 Introduction
+
+The Qt Service Framework defines a unified way of finding, implementing and
+accessing services across multiple platforms.
+
+Due to the service frameworks knowledge of service interfaces, their
+versions and QObject-based introspection it may even be used to unify and
+access multiple platform specific service implementations via the same
+Qt-based client application.
+
+\section1 Overview
+
+A service is an independent component that allows a client to perform a
+well-defined operation. Clients can find services based on their name and
+version as well as the interface that is implemented by the service object.
+Once the service has been identified the framework starts the service and
+returns a pointer to it. QServiceManager is the main interface through
+which clients can access the mentioned framework functionality. In
+addition services themselves may also act as clients to the service
+framework by requesting other services installed on the system.
+
+Service provider are implemented via plug-ins. QServicePluginInterface 
+defines the main interface for each plug-in.
+In order to avoid that clients have to link against service specific
+libraries each service object must be derived from QObject. Therefore the
+QMetaObject system can be used to dynamically discover and invoke the
+service's capabilities.
+To achieve the best level of access via the Qt meta object system services
+should be implemented in such a way that their entire functionality is
+accessable via the signals, slots, properties or invokable functions
+(see Q_INVOKABLE macro for more details).
+
+Each service plug-in implements one service only but can provide multiple
+implementations for multiple interfaces. 
+Therefore a service (plug-in) can retain a certain level of backwards
+compatibility even if the main service interface breaks in such a way that
+a new interface name has to be used. Existing clients can still use the
+previous version of service interface whereas new clients can utilize the
+new interface. 
+
+Future versions of this framework may also enable access to out-of-process
+service provider. 
+
+\section1 Using the Framework
+
+This section assumes that the user wants to access the \i FileStorage
+service which offers an implementation for the \i com.nokia.qt.examples.FileStorage
+interface The service framework enables multiple ways of accessing those
+implementations. 
+
+QServiceManager is the main class to lookup and instantiate services.
+Services can be found by constraining the search via service meta data or
+by using the default lookup mechanism.
+
+\section2 Verbose Lookup
+
+The client code has precise knowledge of the service and its interfaces. 
+
+\code
+    QServiceManager manager;
+    QServiceFilter filter("com.nokia.qt.examples.FileStorage");
+    filter.setServiceName("FileStorage");
+
+    // find services complying with filter
+    QList<QServiceInterfaceDescriptor> foundServices;
+    foundServices = manager.findInterfaces(filter);
+    Q_ASSERT(foundServices.count());
+
+    // instantiate the FileStorage object
+    QObject *fileStorage;
+    fileStorage = manager.loadInterface(foundServices.at(0));
+\endcode
+
+\section2 Default Lookup
+
+It is assumed that the client has knowledge of the interface but does not really care
+about the specific type or version of the service implementing the interface. In such cases the default
+service lookup can be utilized to create a service object instance.
+
+\code
+    QServiceManager manager;
+    manager.setInterfaceDefault("FileStorageService", "com.nokia.qt.examples.FileStorage");
+\endcode
+
+The above call to \l QServiceManager::setInterfaceDefault() registers the \i FileStorageService as default implementation.
+Whenever a client asks for an implementation of \i com.nokia.qt.examples.FileStorage the \i FileStorageService
+service will be loaded. If (at the time of this call) the \i FileStorageService provides multiple registered implementations/versions for the
+same interface the latest version becomes the default. Therefore subsequent versions of the same interface
+must always be binary compatible to previous versions.
+
+The current scope of the service manager object determines whether the default assignment is valid for all users
+or whether it is valid for the current user only. The system default is used if the user
+scope has not been defined. This enables users to customize their personal preferences.
+By default the first service installing a so far unknown interface becomes the system wide default selection.
+
+\section3 QObject based services
+
+This is the most common way of interacting with services.
+
+\code
+    storage = manager.loadInterface("com.nokia.qt.examples.FileStorage");
+    if (storage)
+        QMetaObject::invokeMethod(storage, "deleteFile", Q_ARG(QString, "/tmp/readme.txt"));
+\endcode
+
+The above invocation of the file storage object's deleteFile() function is done via the service's
+QMetaObject. The client does not require any knowledge of the objects actual type and therefore
+does not have to link against a service specific library.
+
+\section3 Typed services
+
+So far all lookup mechanism returned a QObject pointer. This pointer can be
+utilized by introspecting the object, using Qt's meta object system.
+However in some use cases it may be more convenient to
+directly interact with the service object by including the service header
+and/or linking against the service provider. The main advantage is compile time checking.
+Its disadvantage is that client and service must share the implementation of the service object via a library
+they link against or via a common header file. Note that such sharing breaks the fundamental ServiceFramework
+principle of separating clients from service as changes of the service type may require changes to both, services and clients.
+
+The subsequent code snippet demonstrates how this may look like:
+
+\code
+    #include <filestorage.h>
+    ...
+    QServiceManager manager;
+    FileStorage *storage = 0;
+    ...
+    storage = manager.loadLocalTypedInterface<FileStorage>("com.nokia.qt.examples.FileStorage");
+    if (storage)
+        storage->deleteFile("/tmp/readme.txt");
+\endcode
+
+
+\section1 Service Scope
+
+The QServiceManager operates in either \l{QService::UserScope}{User scope}
+or \l{QService::SystemScope}{System scope}. By default, it operates
+in user scope. The choice of scope affects whether registered services are
+available system-wide or only to the current user, and whether service and
+interface lookups are limited to system-wide service or whether the current
+user's together with system service configurations are considered.
+
+\section2 User Scope
+
+In user scope, services are registered in a storage location specific to
+the current user. When a default service is set for an interface using
+\l{QServiceManager::setInterfaceDefault()}{setInterfaceDefault()}, the
+referenced service can be either a user-specific or system-wide service.
+
+For service and interface lookups, a manager will first search the
+user-specific services; if the requested component is not found, the
+manager then searches the system-wide services, if the user has
+sufficient permissions to do so.
+
+The \l{QServiceManager::serviceAdded()} and \l{QServiceManager::serviceRemoved()}
+notifications are emitted when services are added or removed from either
+the user-specific or system-wide services. These signals have a \c scope
+parameter to indicate the scope in which the service was added or removed.
+(Note the system-wide service notifications are only available if the user
+has sufficient permissions to access the system-wide service storage.)
+
+\section2 System Scope
+
+In system scope, services are registered in a system-wide storage location.
+The manager does not access user-specific services for any operations.
+Service and interface lookups fail if the requested services are not found
+in the system-wide service storage. Service registration is performed in
+the system-wide storage.
+
+If \l{QServiceManager::setInterfaceDefault()}{setInterfaceDefault()} is
+called for a user-specific service, the operation fails.
+
+Also, the \l{QServiceManager::serviceAdded()} and \l{QServiceManager::serviceRemoved()}
+notifications are only emitted for system-wide services.
+
+
+
+\section1 Adding and Removing of Services
+
+New services can be installed and removed at runtime. An XML file is used
+to describe the service meta data and links the service code to its meta
+description.
+
+\section2 XML Format
+
+Services are installed via an XML file which describes the meta data and
+location of the service. The xml file can be described via the following 
+DTD:
+
+\code
+    <!ELEMENT service ( name, filepath, description?, interface+ ) >
+    <!ELEMENT description ( #CDATA ) >
+    <!ELEMENT filepath ( #PCDATA ) >
+    <!ELEMENT interface ( name, version, description?, capabilities?, customproperty* ) >
+    <!ELEMENT capabilities ( #PCDATA ) >
+    <!ELEMENT name ( #PCDATA ) >
+    <!ELEMENT version ( #PCDATA ) >
+    <!ELEMENT customproperty ( #CDATA ) >
+    <!ATTLIST customproperty key NMTOKEN #REQUIRED >
+
+\endcode
+
+The elements and attributes have the following meanings:
+
+\table
+    \header
+        \o Element \o SubElement \o Description
+   \row
+        \o service
+        \o 
+        \o The \i service tag can contain an arbitrary number of \i interface tags and one description tag.
+    \row
+        \o "
+        \o description
+        \o A user readable description of the purpose of the service.
+    \row
+        \o "
+        \o filepath
+        \o The absolute path and name of the plug-in to be loaded when this
+           service is requested. Alternatively if the plug-in name only is
+           provided the standard library paths (see QCoreApplication::libraryPaths())
+           are used to find the plug-in.
+           Note that if the plugin name is given only, platform specific
+           parts such as the suffix ".dll" and ".so" or plugin prefix "lib"
+           should be removed to enable cross platform resolution. QLibrary
+           is used to determine the platform specific parts of the plugin.
+    \row
+        \o "
+        \o name
+        \o The name of the service.
+    \row
+        \o interface
+        \o
+        \o The \i interface describes the properties of the interface.
+    \row
+        \o "
+        \o capabilities
+        \o This property is a list of arbitrary strings which are
+           interpreted as permissions/capabilities. The list elements are
+           comma-separated and spaces after commas are not permitted.
+           This list can be empty.
+    \row
+        \o "
+        \o name
+        \o The name of the interface using the Java class name notation. (e.g. com.nokia.qt.TestService)
+    \row
+        \o "
+        \o version
+        \o This property contains the interface and implementation version.
+        The version tag follows the \i major.minor notation. The major 
+        version indicates the interface version the minor version the 
+        implementation version.
+
+           The version number \bold must be greater than 1.0. The version
+           cannot be less than 1.0 because the Service Framework is
+           dependent on the fact that services must be binary compatible
+           between major versions, and services with versions less than 1.0
+           are unlikely to be binary compatible with later versions.
+    \row
+        \o "
+        \o description
+        \o A user readable description of the purpose of the interface.
+    \row
+        \o "
+        \o customproperty
+        \o An implementation specific key value pair which can be used for
+        filtering or as description.
+ 
+\endtable
+
+
+An example for a valid XML service description could be the following \i TestService:
+
+\code
+    <?xml version="1.0" encoding="utf-8" ?>
+    <service>
+        <name>TestService</name>
+        <filepath>testserviceplugin</filepath>
+        <description>Test service description</description>
+        <interface>
+            <name>com.nokia.qt.ILocation</name>
+            <version>1.4</version>
+            <capabilities></capabilities>
+            <description>Interface that provides location support</description>
+        </interface>
+        <interface>
+            <name>com.nokia.qt.ILocation</name>
+            <version>1.5</version>
+            <capabilities></capabilities>
+            <description>Interface that provides location support</description>
+        </interface>
+        <interface>
+            <name>com.nokia.qt.ISysInfo</name>
+            <capabilities>ReadUserData</capabilities>
+            <version>2.3</version>
+            <description>Interface that provides system information support</description>
+            <customproperty key="key1">value1</customproperty>
+            <customproperty key="key2">value2</customproperty>
+        </interface>  
+    </service>
+\endcode
+
+\section1 Tools for XML Generation
+
+The framework includes a GUI tool under \tt tools/servicexmlgen for 
+generating and inspecting service XML files. This makes it easy to enter
+service metadata and interface details and generate the appropriate XML to
+describe the service. It can also be used to load and inspect existing
+service XML files.
+
+Here is a screenshot of the application, loaded with the \i TestService XML
+description provided above.
+
+\image servicexmlgen.png
+
+
+\section1 Installing the Service at Runtime
+
+New services can be added and removed at any time via QServiceManager::addService()
+and QServiceManager::removeService().
+
+On Symbian devices a service can be installed using the Symbian package installer. More
+details about this process can be found in the \l {Qt Service Framework on Symbian} documentation.
+
+
+\section1 Identifying Services
+
+Each implementation is identified by a service name, an interface name and
+its version. This information is encapsulated by
+QServiceInterfaceDescriptor which can be used to request references to
+service objects. 
+
+QServiceFilter simplifies the lookup of already installed services.
+Developers specifies the criteria used during the meta data lookup.
+The subsequent example demonstrates the interaction between
+QServiceInterfaceDescriptor and QServiceFilter by creating references to
+all services that implement the interface \i com.nokia.qt.ILocation:
+
+\code
+    QServiceManager mgr;
+    QServiceFilter filter;
+    filter.setInterface("com.nokia.qt.ILocation");
+    QList<QServiceInterfaceDescriptor> list = mgr.findInterfaces(filter);
+    for(int i = 0; i < list.size(); i++) {
+        QObject *serviceObject;
+        serviceObject = mgr.loadInterface(list[i]);
+
+        // returned object owned by client
+        if (serviceObject)
+            serviceObject->setParent(this);
+    }
+\endcode
+
+\section2 Upgrading Services
+There are two ways in which to upgrade a service.  The first is an
+incremental approach whereby QServiceManager::addService() is used to
+register an XML descriptor whose service name already exists but defines
+new interface implementations.  For example an already existing service,
+"ovi" may define version 1.0 of interface,"IDownload".
+QServiceManager::addService() is then called with an XML descriptor that
+declares itself as belonging the "ovi" service, but implements version 1.1
+of the interface "IDownload".  Both implementation versions will be
+available for use.
+
+The second method is a replacement approach whereby an existing service is
+completely removed and replaced by a new service.
+
+As an example the already existing "ovi" service may implement interface
+"IDownload" version 1.0, the new "ovi" service may implement "IDownload"
+version 1.0 and version 1.1.  In this case the old service implementation
+must be first be removed using QServiceManager::removeService() to make
+way for the new service implementation.
+
+\section1 Examples
+
+\list
+    \o \l{File Manager Plugin Example}
+    \o \l{Bluetooth Transfer Plugin Example}
+    \o \l{Service Browser Example}
+\endlist
+
+
+\section1 Main Classes
+\annotatedlist servicefw
+
+*/

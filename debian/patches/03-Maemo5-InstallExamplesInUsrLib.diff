@@ -1,0 +1,11 @@
+--- a/examples/examples.pri	2010-02-10 19:00:37.000000000 +0200
++++ b/examples/examples.pri	2010-02-10 19:01:46.000000000 +0200
+@@ -18,7 +18,7 @@
+ }
+ 
+ OUTPUT_DIR = $$QT_MOBILITY_BUILD_TREE
+-DESTDIR = $$OUTPUT_DIR/bin/examples
++DESTDIR = $$OUTPUT_DIR/debian/tmp/usr/bin/
+ MOC_DIR = $$OUTPUT_DIR/build/$$SUBDIRPART/$$TARGET/moc
+ RCC_DIR = $$OUTPUT_DIR/build/$$SUBDIRPART/$$TARGET/rcc
+ UI_DIR = $$OUTPUT_DIR/build/$$SUBDIRPART/$$TARGET/ui

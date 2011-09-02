@@ -1,0 +1,85 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/autotools.mk
+include /usr/share/cdbs/1/rules/patchsys-quilt.mk
+
+### Add here any variable or target overrides you need.
+QTM_VERSION := $(shell grep QTM_VERSION_STR src/global/qmobilityglobal.h | cut -d'"' -f2)
+
+# Find out how many parallel threads to run
+TMP_BUILD_OPTS = $(subst $(comma),$(space),$(DEB_BUILD_OPTIONS))
+ifneq (,$(filter parallel=%,$(TMP_BUILD_OPTS)))
+  NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(TMP_BUILD_OPTS)))
+  PARALLEL_MAKEFLAGS += -j$(NUMJOBS)
+endif
+
+DEB_MAKE_INVOKE := $(MAKE) $(PARALLEL_MAKEFLAGS)
+DEB_MAKE_INSTALL_TARGET := INSTALL_ROOT=$(DEB_DESTDIR) install
+DEB_DH_INSTALL_SOURCEDIR := debian/tmp
+DEB_CLEAN_EXCLUDE := debian/tmp
+# Add here any variable or target overrides you need.
+# Add here any variable or target overrides you need.
+DEB_CONFIGURE_NORMAL_ARGS := -maemo5  -prefix /usr -headerdir /usr/include \
+	-plugindir /usr/lib/qt4/plugins \
+	-examples  
+                                                
+
+DEB_CONFIGURE_EXTRA_FLAGS := -debug -silent 
+
+clean::
+	rm -Rf debian/config.tests debian/config.pri
+	rm -Rf debian/tmp
+
+# Automatically install lintian overrides, stolen from debian-qt-kde.mk
+$(patsubst %,binary-install/%,$(DEB_PACKAGES)) :: binary-install/%:
+	if test -e debian/$(cdbs_curpkg).lintian; then \
+	install -p -D -m644 debian/$(cdbs_curpkg).lintian \
+	debian/$(cdbs_curpkg)/usr/share/lintian/overrides/$(cdbs_curpkg); \
+fi
+
+common-install-arch:: optify-libs
+
+optify-libs:
+	rm -rf $(DEB_DESTDIR)/opt/{lib,bin} 2>/dev/null
+	# Create softlinks to the files in /opt/lib to /usr/lib
+	mkdir -p $(DEB_DESTDIR)/opt/lib
+	mv $(DEB_DESTDIR)/usr/lib/*.so.$(QTM_VERSION) $(DEB_DESTDIR)/opt/lib
+	for file in `find $(DEB_DESTDIR)/opt/lib -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/lib" /opt/lib/`basename $${file}`; \
+	done
+
+	# Create softlinks to the files in /opt/lib/qt4/plugins/ to /usr/lib/qt4/plugins/
+	mkdir -p $(DEB_DESTDIR)/opt/lib/qt4/plugins/contacts
+	mv $(DEB_DESTDIR)/usr/lib/qt4/plugins/contacts/* $(DEB_DESTDIR)/opt/lib/qt4/plugins/contacts
+	for file in `find $(DEB_DESTDIR)opt/lib/qt4/plugins/contacts -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/lib/qt4/plugins/contacts" /opt/lib/qt4/plugins/contacts/`basename $${file}`; \
+	done
+	mkdir -p $(DEB_DESTDIR)/opt/lib/qt4/plugins/sensors
+	mv $(DEB_DESTDIR)/usr/lib/qt4/plugins/sensors/* $(DEB_DESTDIR)/opt/lib/qt4/plugins/sensors
+	for file in `find $(DEB_DESTDIR)opt/lib/qt4/plugins/sensors -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/lib/qt4/plugins/sensors" /opt/lib/qt4/plugins/sensors/`basename $${file}`; \
+	done
+	mkdir -p $(DEB_DESTDIR)/opt/lib/qt4/plugins/mediaservice
+	mv $(DEB_DESTDIR)/usr/lib/qt4/plugins/mediaservice/* $(DEB_DESTDIR)/opt/lib/qt4/plugins/mediaservice
+	for file in `find $(DEB_DESTDIR)opt/lib/qt4/plugins/mediaservice -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/lib/qt4/plugins/mediaservice" /opt/lib/qt4/plugins/mediaservice/`basename $${file}`; \
+	done
+	mkdir -p $(DEB_DESTDIR)/opt/lib/qt4/plugins/playlistformats
+	mv $(DEB_DESTDIR)/usr/lib/qt4/plugins/playlistformats/* $(DEB_DESTDIR)/opt/lib/qt4/plugins/playlistformats
+	for file in `find $(DEB_DESTDIR)opt/lib/qt4/plugins/playlistformats -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/lib/qt4/plugins/playlistformats" /opt/lib/qt4/plugins/playlistformats/`basename $${file}`; \
+	done
+	mkdir -p $(DEB_DESTDIR)/opt/lib/qt4/plugins/serviceframework
+	mv $(DEB_DESTDIR)/usr/lib/qt4/plugins/serviceframework/* $(DEB_DESTDIR)/opt/lib/qt4/plugins/serviceframework
+	for file in `find $(DEB_DESTDIR)opt/lib/qt4/plugins/serviceframework -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/lib/qt4/plugins/serviceframework" /opt/lib/qt4/plugins/serviceframework/`basename $${file}`; \
+	done
+
+	# Create softlinks to the files in /opt/bin to /usr/bin
+	mkdir -p $(DEB_DESTDIR)/opt/bin
+	mv $(DEB_DESTDIR)/usr/bin/* $(DEB_DESTDIR)/opt/bin
+	for file in `find $(DEB_DESTDIR)/opt/bin -maxdepth 1 -type f -o -type l `; do \
+	    ln -s --target-directory="$(DEB_DESTDIR)/usr/bin" /opt/bin/`basename $${file}`; \
+	done
+

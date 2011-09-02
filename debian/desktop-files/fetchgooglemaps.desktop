@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=fetchgooglemaps
+Exec=/opt/bin/fetchgooglemaps
+Icon=qt-mobility-example
+StartupWMClass=qt-mobility-example-fetchgooglemaps
+X-Window-Icon=qt-mobility-example
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
+Terminal=false
+

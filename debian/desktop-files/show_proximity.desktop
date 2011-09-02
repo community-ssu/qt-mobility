@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=show_proximity
+Exec=/usr/bin/osso-xterm /opt/bin/show_proximity
+Icon=qt-mobility-example
+StartupWMClass=qt-mobility-example-show_proximity
+X-Window-Icon=qt-mobility-example
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
+Terminal=true
+

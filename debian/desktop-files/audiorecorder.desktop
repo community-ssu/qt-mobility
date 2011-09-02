@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=audiorecorder
+Exec=/opt/bin/audiorecorder
+Icon=qt-mobility-example
+StartupWMClass=qt-mobility-example-audiorecorder
+X-Window-Icon=qt-mobility-example
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
+Terminal=true
+

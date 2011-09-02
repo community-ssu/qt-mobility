@@ -1,0 +1,102 @@
+/****************************************************************************
+**
+** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the Qt Mobility Components.
+**
+** $QT_BEGIN_LICENSE:LGPL$
+** Commercial Usage
+** Licensees holding valid Qt Commercial licenses may use this file in
+** accordance with the Qt Solutions Commercial License Agreement provided
+** with the Software or, alternatively, in accordance with the terms
+** contained in a written agreement between you and Nokia.
+**
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Nokia gives you certain additional
+** rights.  These rights are described in the Nokia Qt LGPL Exception
+** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
+**
+** Please note Third Party Software included with Qt Solutions may impose
+** additional restrictions and it is the user's responsibility to ensure
+** that they have met the licensing requirements of the GPL, LGPL, or Qt
+** Solutions Commercial license and the relevant license of the Third
+** Party Software they are using.
+**
+** If you are unsure which license is appropriate for your use, please
+** contact the sales department at qt-sales@nokia.com.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+
+\page service-framework-on-symbian.html
+
+\title Qt Service Framework on Symbian
+
+\section1 How to register and unregister service plugins in S60?
+
+Registration phase is a little different compared to other platforms because of the
+authenticity of the provider is done during (un)registering phase based on the verification 
+of VID/SID (vendor ID or secure ID). A tiny installer application must be implemented 
+by the service provider. Installer application is responsible for the registering (and the unregistering) 
+of the service. The example code for the installer is shown below. The whole installer project can be found under 
+\c {examples/serviceinstaller_sfw_symbian}.
+
+\snippet examples/serviceinstaller_sfw_symbian/exampleinstaller/exampleinstaller.cpp 0
+
+If you want to create your own installer take a copy from the installer project (\c {examples/serviceinstaller_sfw_symbian})
+and modify only the necessary parts e.g a target for your installer and define plugins which are deployed etc.
+
+If the installer defines the VID (non-zero value) then the VID is stored to the database, otherwise SID is used.
+When unregistering the plugin the VID/SID verification is done to ensure that only the application which actually
+registered the service is only allowed to remove it. VID/SID is left to the database even the service has been
+unregistered. This prevents the exactly same way named services to be installed afterwards because the VID/SID
+information is locked to the service name.
+
+More info about VID and SID can be found from:
+\list
+    \o \l {http://developer.symbian.org/wiki/index.php/Platform_Security_%28Fundamentals_of_Symbian_C%2B%2B%29#VendorID}{VendorID}
+    \o \l {http://developer.symbian.org/wiki/index.php/Platform_Security_%28Fundamentals_of_Symbian_C%2B%2B%29#SecureID}{SecureID}
+\endlist
+
+
+\section1 What's special from the security perspective?
+
+There is only one database in S60 because both databases (user and system) are combined to the same database.
+The database is located behind the server's private folder, (\c{c:\private\E3b48c24}). This ensures the database can't
+be thumbered (e.g. remove, move or replace) without Allfiles capability which isn't user-grantable (More about the
+capabilities: \l http://wiki.forum.nokia.com/index.php/Capabilities). That makes it impossible for example to replace the
+whole database with the new one which might contain malicious services.
+
+Note! It doesn't matter which scope is used on Symbian as \l {QService::UserScope} and \l {QService::SystemScope}
+are mapped to the same database.
+
+\section1 Directory structure
+
+There are different implementations for the both emulator and device because emulator doesn't support multiple
+applications to be loaded at the same time, (Known issue: \l {http://bugreports.qt.nokia.com/browse/QTBUG-2950}{QTBUG-2950}).
+The dll approach must be used in the emulator environment and the exe approach instead of dll in the real device.
+
+Note! The greatest part of the S60 specific code is located under the symbian folder in a directory hierarchy of
+Service FW. ServiceDatabase class contains also S60 specific code and the DatabaseManager class has been replaced
+totally with the corresponding class.
+
+*/

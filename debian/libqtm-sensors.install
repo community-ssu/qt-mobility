@@ -1,0 +1,6 @@
+opt/lib/libQtSensors.so.*
+usr/lib/libQtSensors.so.*
+opt/lib/qt4/plugins/sensors/libqtsensors_generic.so
+opt/lib/qt4/plugins/sensors/libqtsensors_n900.so 
+usr/lib/qt4/plugins/sensors/libqtsensors_generic.so
+usr/lib/qt4/plugins/sensors/libqtsensors_n900.so 

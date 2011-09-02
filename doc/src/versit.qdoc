@@ -1,0 +1,118 @@
+/****************************************************************************
+**
+** Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+** All rights reserved.
+** Contact: Nokia Corporation (qt-info@nokia.com)
+**
+** This file is part of the Qt Mobility Components.
+**
+** $QT_BEGIN_LICENSE:LGPL$
+** Commercial Usage
+** Licensees holding valid Qt Commercial licenses may use this file in
+** accordance with the Qt Solutions Commercial License Agreement provided
+** with the Software or, alternatively, in accordance with the terms
+** contained in a written agreement between you and Nokia.
+**
+** GNU Lesser General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU Lesser
+** General Public License version 2.1 as published by the Free Software
+** Foundation and appearing in the file LICENSE.LGPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU Lesser General Public License version 2.1 requirements
+** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
+**
+** In addition, as a special exception, Nokia gives you certain additional
+** rights.  These rights are described in the Nokia Qt LGPL Exception
+** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3.0 as published by the Free Software
+** Foundation and appearing in the file LICENSE.GPL included in the
+** packaging of this file.  Please review the following information to
+** ensure the GNU General Public License version 3.0 requirements will be
+** met: http://www.gnu.org/copyleft/gpl.html.
+**
+** Please note Third Party Software included with Qt Solutions may impose
+** additional restrictions and it is the user's responsibility to ensure
+** that they have met the licensing requirements of the GPL, LGPL, or Qt
+** Solutions Commercial license and the relevant license of the Third
+** Party Software they are using.
+**
+** If you are unsure which license is appropriate for your use, please
+** contact the sales department at qt-sales@nokia.com.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+/*!
+
+\page versit.html
+\title Versit API
+\brief An API to manage Versit documents.
+\ingroup mobility
+
+\tableofcontents
+
+\section1 Namespace
+
+The QtMobility APIs are placed into the \i{QtMobility} namespace. This is done
+to facilitate the future migration of Mobility APIs into Qt. See the
+\l {Quickstart Example}{Quickstart guide} for an example on how the
+namespace impacts on application development.
+
+\section1 Overview
+The Versit API provides a library to convert \l{QContact}{QContacts} to and from
+\l{http://en.wikipedia.org/wiki/Vcard}{vCard} files.
+
+vCards are represented abstract form with the QVersitDocument class.  vCard
+files can be parsed into QVersitDocument form using QVersitReader.
+QVersitDocument objects can be written to an I/O device using QVersitWriter.
+
+\l{QVersitDocument}{QVersitDocuments} can be converted to
+\l{QContact}{QContacts} using QVersitContactImporter.  \l{QContact}{QContacts}
+can be converted to \l{QVersitDocument}{QVersitDocuments} using
+QVersitContactExporter.
+
+Currently \l{QVersitReader} and \l{QVersitWriter} support reading and writing
+vCard 2.1 and vCard 3.0 format documents.  
+
+Versit \reg is a trademark of the Internet Mail Consortium.
+
+\section1 Usage
+The following example goes through the process of reading a vCard and importing
+it to QContact format, then exporting and writing it back out.
+
+First, let's create some data to read.  In this case, we create a QBuffer as a demonstration, but
+any QIODevice will work.
+\snippet ../../doc/src/snippets/qtversitdocsample/qtversitdocsample.cpp Complete example - create
+
+QVersitReader can be used to parse a vCard or iCalendar from an I/O device to
+produce a list of QVersitDocuments.
+\snippet ../../doc/src/snippets/qtversitdocsample/qtversitdocsample.cpp Complete example - read
+
+QVersitDocuments aren't very useful to the QtContacts API.  They need to be imported using the
+QVersitContactImporter.
+\snippet ../../doc/src/snippets/qtversitdocsample/qtversitdocsample.cpp Complete example - import
+
+Conversely, QVersitContactExporter can be used to convert from QContacts to QVersitDocuments.
+\snippet ../../doc/src/snippets/qtversitdocsample/qtversitdocsample.cpp Complete example - export
+
+To complete the exporting process, QVersitWriter can be used to write to an I/O device.
+\snippet ../../doc/src/snippets/qtversitdocsample/qtversitdocsample.cpp Complete example - write
+
+\section1 Main Classes
+\list
+    \o \l{QVersitProperty}
+    \o \l{QVersitDocument}    
+    \o \l{QVersitReader}
+    \o \l{QVersitWriter}    
+    \o \l{QVersitContactImporter}
+    \o \l{QVersitContactExporter}
+\endlist
+
+\section1 Supported Features
+Please see the \l{vcardsupport}{Supported vCard Features} document for a list of vCard
+features that the Versit module
+supports.
+*/

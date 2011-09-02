@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=weatherinfo_with_location
+Exec=/opt/bin/weatherinfo_with_location
+Icon=qt-mobility-example
+StartupWMClass=qt-mobility-example-weatherinfo_with_location
+X-Window-Icon=qt-mobility-example
+X-HildonDesk-ShowInToolbar=true
+X-Osso-Type=application/x-executable
+Terminal=false
+

@@ -1,0 +1,29 @@
+diff --git a/plugins/sensors/generic/generic.pro b/plugins/sensors/generic/generic.pro
+index 93c3446..e9f7130 100644
+--- a/plugins/sensors/generic/generic.pro
++++ b/plugins/sensors/generic/generic.pro
+@@ -24,7 +24,7 @@ MOBILITY+=sensors
+ 
+ CONFIG+=strict_flags
+ 
+-DESTDIR = $$OUTPUT_DIR/bin/examples/sensors
+-target.path = $$SOURCE_DIR/plugins/sensors
++DESTDIR= $$SOURCE_DIR/plugins/sensors
++target.path = $$QT_MOBILITY_LIB/qt4/plugins/sensors
+ INSTALLS += target
+ 
+diff --git a/plugins/sensors/n900/n900.pro b/plugins/sensors/n900/n900.pro
+index 9a037c1..393bb84 100644
+--- a/plugins/sensors/n900/n900.pro
++++ b/plugins/sensors/n900/n900.pro
+@@ -14,8 +14,8 @@ MOBILITY+=sensors
+ 
+ CONFIG+=strict_flags
+ 
+-DESTDIR = $$OUTPUT_DIR/bin/examples/sensors
+-target.path = $$SOURCE_DIR/plugins/sensors
++DESTDIR= $$SOURCE_DIR/plugins/sensors
++target.path = $$QT_MOBILITY_LIB/qt4/plugins/sensors
+ INSTALLS += target
+ 
+ BUILD_ALL_PLUGINS=$$(BUILD_ALL_PLUGINS)

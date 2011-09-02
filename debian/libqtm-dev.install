@@ -1,0 +1,11 @@
+usr/include/*
+usr/share/qt4/mkspecs/features/mobility.prf
+#opt/bin/icheck  (don't need to include this)
+opt/bin/qcrmlgen
+usr/bin/qcrmlgen
+opt/bin/servicexmlgen
+usr/bin/servicexmlgen
+opt/bin/vsexplorer
+usr/bin/vsexplorer
+usr/lib/*.pc usr/lib/pkgconfig/
+usr/lib/*.so

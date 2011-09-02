@@ -1,0 +1,331 @@
+Source: qt-mobility
+Section: user/libs
+Priority: extra
+Maintainer: Antonio Aloisio <antonio.aloisio@nokia.com>
+Build-Depends: libqt4-dev (>= 4.6.0), cdbs, debhelper (>= 5), autotools-dev, quilt, libasound2-dev, libgconf2-dev,
+ libosso-abook-dev, libdbus-1-dev, libgconf2-dev, libglib2.0-dev, libsqlite3-dev, liblocation-dev, libgstreamer0.10-dev, 
+ libgstreamer-plugins-base0.10-dev, libtpsession-dev (>= 0.1-4), libxml2-dev, libxv-dev, libasound2-dev,
+ libconninet0-dev, libconnsettings0-dev, libicd-network-wlan-dev, libbluetooth3-dev, libtelepathy-qt4-dev, libxrandr-dev
+Standards-Version: 3.7.2
+
+Package: libqtm-dev
+Architecture: any
+Section: user/libs
+Depends: libqtm-bearer (= ${binary:Version}), libqtm-location (= ${binary:Version}),
+ libqtm-contacts (= ${binary:Version}), libqtm-multimedia (= ${binary:Version}),
+ libqtm-publishsubscribe (= ${binary:Version}), libqtm-versit (= ${binary:Version}),
+ libqtm-messaging (= ${binary:Version}), libqtm-systeminfo (= ${binary:Version}),
+ libqtm-serviceframework (= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility development files
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This package contains the header development files and tools.
+
+Package: libqtm-bearer
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility Bearer module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtBearer module
+ .
+ If you wish to to use the bearer module for development, you should install
+ the libqtm-dev package.
+
+Package: libqtm-location
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility location module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtLocation module
+ .
+ If you wish to to use the location module for development, you should install
+ the libqtm-dev package.
+
+Package: libqtm-contacts
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility contacts module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtContacts module
+ .
+ If you wish to to use the contacts module for development, you should install
+ the libqtm-dev package.
+
+Package: libqtm-multimedia
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}, n900-fmrx-enabler [arm armel]
+Description: Qt Mobility multimedia module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtMultimedia module
+ .
+ If you wish to to use the multimedia module for development, you should
+ install the libqtm-dev package.
+
+Package: libqtm-publishsubscribe
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility publish and subscribe module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ If you wish to to use the publish and subscribe module for development, you
+ should install the libqtm-dev package.
+
+Package: libqtm-versit
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility versit module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtVersit module
+ .
+ If you wish to to use the versit module for development, you should install
+ the libqtm-dev package.
+
+Package: libqtm-messaging
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}, qtm-modest-plugin (>= 0.0.2-4)
+Description: Qt Mobility messaging module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ If you wish to to use the messaging module for development, you should install
+ the libqtm-dev package.
+
+Package: libqtm-systeminfo
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility system information module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtSystemInfo module
+ .
+ If you wish to to use the systeminfo module for development, you should
+ install the libqtm-dev package.
+
+Package: libqtm-serviceframework
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite
+Replaces: libqtm-dev (<< 1:1.0.2-maemo2) 
+Breaks: libqtm-dev (<< 1:1.0.2-maemo2)
+Description: Qt Mobility service framework module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtServiceFramework module
+ .
+ If you wish to to use the serviceframework module for development, you should
+ install the libqtm-dev package.
+
+Package: libqtm-sensors
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Qt Mobility sensors framework module
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ The QtSensors module
+ .
+ If you wish to to use the sensors module for development, you should install
+ the libqtm-dev package.
+
+Package: qt-mobility-examples
+Architecture: any
+Section: user/libs
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: libqtm-examples 
+Replaces: libqtm-examples
+Description: Qt Mobility examples 
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This package contains Mobility examples
+
+Package: libqtm-bearer-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-bearer (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt bearer libraries.
+
+Package: libqtm-location-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-location (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt location libraries.
+
+Package: libqtm-contacts-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-contacts (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt contacts libraries.
+
+Package: libqtm-multimedia-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-multimedia (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt multimedia libraries.
+
+Package: libqtm-publishsubscribe-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-publishsubscribe (= ${binary:Version})
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt publishsubscribe
+ libraries.
+
+Package: libqtm-versit-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-versit (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt versit libraries.
+
+Package: libqtm-messaging-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-messaging (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt messaging libraries.
+
+Package: libqtm-systeminfo-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-systeminfo (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt systeminfo libraries.
+
+Package: libqtm-serviceframework-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-serviceframework (= ${binary:Version}) 
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt serviceframework
+ libraries.
+
+Package: libqtm-sensors-dbg
+Architecture: any
+Section: debug
+Depends: libqtm-sensors (= ${binary:Version})
+Description: Qt Mobility library debugging symbols
+ Qt Mobility Project delivers a set of new APIs to Qt with features that are
+ well known from the mobile device world, in particular phones. However, 
+ these APIs allow the developer to use these features with ease from one 
+ framework and apply them to phones, netbooks and non-mobile personal 
+ computers.
+ .
+ This packages contains the debugging symbols for the Qt sensors libraries.

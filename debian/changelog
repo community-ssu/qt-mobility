@@ -1,0 +1,111 @@
+qt-mobility (1:1.0.2-maemo4+0m5) unstable; urgency=low
+
+  * This entry has been added by BIFH queue processor
+    version has been changed to 1:1.0.2-maemo4+0m5
+
+ -- Shane Bradley <shane.bradley@nokia.com>  Thu, 09 Sep 2010 13:36:16 +0300
+
+qt-mobility (1:1.0.2-maemo4) unstable; urgency=low
+
+   * Fixes: NB#191010 - Qt Mobility Sensors API plugins not correctly optified in PE1 SSU upgrade
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Thu, 09 Sep 2010 17:45:13 +1000
+
+qt-mobility (1:1.0.2-maemo3) unstable; urgency=low
+
+   * Optification of Mobility libraries.
+   * Fixes: NB#189445 - Integrate Qt Mobility 1.0.2 to Fremantle PE1 image
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Thu, 02 Sep 2010 17:45:13 +1000
+
+qt-mobility (1:1.0.2-maemo2) unstable; urgency=low
+
+  * Move servicefw from libqtm-dev to libqtm-serviceframework 
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Mon, 23 Aug 2010 13:57:25 +0300
+
+qt-mobility (1:1.0.2-maemo1) unstable; urgency=low
+
+  * Update code to 1.0.2 release state.
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Mon, 15 Jul 2010 17:19:20 +1000
+
+qt-mobility (1:1.0.1-maemo1) unstable; urgency=low
+
+  * Update code to 1.0.1 release state.
+  * Update depencencies:
+    * libtpsession (>= 0.1-4)
+    * qtm-modest-plugin (0.0.2-4)
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Wed, 16 Jun 2010 15:07:20 +1000
+
+qt-mobility (1:1.0.0-maemo1) unstable; urgency=low
+
+  * Update code to 1.0 release state.
+  * Enable Bearer dependencies.
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Tue, 27 Apr 2010 17:44:12 +1000
+
+qt-mobility (1:1.0.0~git20100408-maemo1) unstable; urgency=low
+
+  * Update build dependencies
+    * Add TPSession-dev
+    * Add Bearer dependencies, but they are disabled
+    * Add libosso-abook-dev 
+    * Remove pc-connectivity
+  * Multimedia depends from n900-fmrx-enabler
+  * Messaging depends from qtm-modest-plugin 
+  * Add example desktop files
+  * Desktop files can run applications without GUI
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Mon, 19 Apr 2010 11:57:23 +0200
+
+qt-mobility (1:1.0.0~git20100408-maemo0) unstable; urgency=low
+
+  * Update code to git20100408 
+  * Update debian files
+    * Messaging supported
+    * Bearer Manager disabled - Missing dependence
+    * Switch to the official Maemo5 PR 1.2 Qt version
+    * Remove hardcoded binary Qt deps
+    * Remove unnecessary debian patches
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Wed, 7 Apr 2010 11:31:45 +0100
+
+qt-mobility (1:1.0.0~git20100315-maemo0) unstable; urgency=low
+
+  * Update codebase to 1.0.
+
+ -- Qt Development Frameworks <qt-info@nokia.com>  Mon, 15 Mar 2010 15:12:13 +1000
+
+qt-mobility (1.0.0-beta1-maemo4) unstable; urgency=low
+
+  * Rename libqtm-examples.install to qt-mobility-examples.install
+  * Add conflict and replace fields for qt-mobility-examples
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Wed, 13 Feb 2010 13:13:25 +0200
+
+qt-mobility (1.0.0-beta1-maemo3) unstable; urgency=low
+
+  * Rename example package to qt-mobility-examples
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Wed, 13 Feb 2010 13:13:25 +0200
+
+qt-mobility (1.0.0-beta1-maemo2) unstable; urgency=low
+
+  * Add hardcoded Qt 4.6 package dependencies :(
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Wed, 13 Feb 2010 12:20:25 +0200
+
+qt-mobility (1.0.0-beta1-maemo1) unstable; urgency=low
+
+  * Update Mobility to 1.0.0-beta1 
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Wed, 10 Feb 2010 06:23:45 +0200
+
+qt-mobility (1.0.0~git20100113-0maemo0) unstable; urgency=low
+
+  * Initial release
+
+ -- Antonio Aloisio <antonio.aloisio@nokia.com>  Wed, 13 Jan 2010 00:09:39 +0200
+

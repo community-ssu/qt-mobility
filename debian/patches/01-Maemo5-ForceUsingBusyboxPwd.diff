@@ -1,0 +1,75 @@
+# Description:
+# /bin/pwd returns real path.
+# eg:
+#   cd usr; /bin/pwd returns /targets/FREMANTLE_X86/usr 
+# Author: Antonio Aloisio <antonio.aloisio@nokia.com>
+#
+--- a/configure	2010-01-13 00:44:43.000000000 +0200
++++ b/configure 2010-01-14 11:01:45.000000000 +0200
+@@ -41,12 +41,12 @@
+ #############################################################################
+ 
+ # the current directory (shadow build dir)
+-shadowpath=`/bin/pwd`
++shadowpath=`pwd`
+ # the name of this script
+ relconf=`basename $0`
+ # the directory of this script is the "source tree"
+ relpath=`dirname $0`
+-relpath=`(cd "$relpath"; /bin/pwd)`
++relpath=`(cd "$relpath"; pwd)`
+ 
+ CONFIG_IN="$shadowpath/config.in"
+ QT_MOBILITY_PREFIX=$shadowpath/install
+@@ -228,10 +228,10 @@
+ 
+ #process PREFIX
+ if [ -d "$QT_MOBILITY_PREFIX" ]; then
+-    QT_MOBILITY_PREFIX=`(cd "$QT_MOBILITY_PREFIX"; /bin/pwd)`
++    QT_MOBILITY_PREFIX=`(cd "$QT_MOBILITY_PREFIX"; pwd)`
+ else
+     mkdir -p "$QT_MOBILITY_PREFIX"
+-    absPath=`(cd "$QT_MOBILITY_PREFIX"; /bin/pwd)`
++    absPath=`(cd "$QT_MOBILITY_PREFIX"; pwd)`
+     rm -rf "$QT_MOBILITY_PREFIX"
+     QT_MOBILITY_PREFIX="$absPath"
+ fi
+@@ -241,10 +241,10 @@
+ if [ -z "$QT_MOBILITY_INCLUDE" ]; then
+     QT_MOBILITY_INCLUDE="$QT_MOBILITY_PREFIX/include"
+ elif [ -d "$QT_MOBILITY_INCLUDE" ]; then
+-    QT_MOBILITY_INCLUDE=`(cd "$QT_MOBILITY_INCLUDE"; /bin/pwd)`
++    QT_MOBILITY_INCLUDE=`(cd "$QT_MOBILITY_INCLUDE"; pwd)`
+ else
+     mkdir -p "$QT_MOBILITY_INCLUDE"
+-    absPath=`(cd "$QT_MOBILITY_INCLUDE"; /bin/pwd)`
++    absPath=`(cd "$QT_MOBILITY_INCLUDE"; pwd)`
+     rm -rf "$QT_MOBILITY_INCLUDE"
+     QT_MOBILITY_INCLUDE="$absPath"
+ fi
+@@ -255,10 +255,10 @@
+ if [ -z "$QT_MOBILITY_LIB" ]; then
+     QT_MOBILITY_LIB="$QT_MOBILITY_PREFIX/$LIB_PATH"
+ elif [ -d "$QT_MOBILITY_LIB" ]; then
+-    QT_MOBILITY_LIB=`(cd "$QT_MOBILITY_LIB"; /bin/pwd)`
++    QT_MOBILITY_LIB=`(cd "$QT_MOBILITY_LIB"; pwd)`
+ else
+     mkdir -p "$QT_MOBILITY_LIB"
+-    absPath=`(cd "$QT_MOBILITY_LIB"; /bin/pwd)`
++    absPath=`(cd "$QT_MOBILITY_LIB"; pwd)`
+     rm -rf "$QT_MOBILITY_LIB"
+     QT_MOBILITY_LIB="$absPath"
+ fi
+@@ -268,10 +268,10 @@
+ if [ -z "$QT_MOBILITY_BIN" ]; then
+     QT_MOBILITY_BIN="$QT_MOBILITY_PREFIX/$BIN_PATH"
+ elif [ -d "$QT_MOBILITY_BIN" ]; then
+-    QT_MOBILITY_BIN=`(cd "$QT_MOBILITY_BIN"; /bin/pwd)`
++    QT_MOBILITY_BIN=`(cd "$QT_MOBILITY_BIN"; pwd)`
+ else
+     mkdir -p "$QT_MOBILITY_BIN"
+-    absPath=`(cd "$QT_MOBILITY_BIN"; /bin/pwd)`
++    absPath=`(cd "$QT_MOBILITY_BIN"; pwd)`
+     rm -rf "$QT_MOBILITY_BIN"
+     QT_MOBILITY_BIN="$absPath"
+ fi

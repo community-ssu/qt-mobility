@@ -1,0 +1,12 @@
+diff --git a/examples/sensors/grueplugin/grueplugin.pro b/examples/sensors/grueplugin/grueplugin.pro
+index 5d18b52..38fab20 100644
+--- a/examples/sensors/grueplugin/grueplugin.pro
++++ b/examples/sensors/grueplugin/grueplugin.pro
+@@ -16,6 +16,6 @@ MOBILITY+=sensors
+ CONFIG+=strict_flags
+ 
+ DESTDIR = $$OUTPUT_DIR/bin/examples/sensors
+-target.path = $$SOURCE_DIR/plugins/sensors
++target.path = $$QT_MOBILITY_LIB/qt4/plugins/sensors
+ INSTALLS += target
+ 

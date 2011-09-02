@@ -1,0 +1,4 @@
+opt/lib/libQtServiceFramework.so.*
+usr/lib/libQtServiceFramework.so.*
+opt/bin/servicefw
+usr/bin/servicefw
