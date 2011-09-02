@@ -93,6 +93,7 @@ Q_SIGNALS:
     void activated(const QMediaContent &content);
     void currentIndexChanged(int);
     void playbackModeChanged(QMediaPlaylist::PlaybackMode mode);
+    void currentItemChanged(QMediaContent content);
 
     void surroundingItemsChanged();
 

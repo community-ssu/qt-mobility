@@ -81,7 +81,8 @@ public slots:
     void pause();
     void stop();
     void setMuted(bool);
-
+Q_SIGNALS:
+    void durationChanged(qint64);
 private slots:
     void updateState();
 

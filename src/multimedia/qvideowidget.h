@@ -103,7 +103,7 @@ Q_SIGNALS:
     void contrastChanged(int contrast);
     void hueChanged(int hue);
     void saturationChanged(int saturation);
-
+    void aspectRatioModeChanged(Qt::AspectRatioMode mode);
 protected:
     bool event(QEvent *event);
     void showEvent(QShowEvent *event);
