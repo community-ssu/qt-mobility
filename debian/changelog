@@ -1,4 +1,4 @@
-qt-mobility (1:1.0.2-maemo4+0m5-0cssu1) unstable; urgency=low
+qt-mobility (1:1.0.2-maemo4+0m5+0cssu1) unstable; urgency=low
 
   * Fixed build under Qt 4.7.4
     version has been changed to 1:1.0.2-maemo4+0m5-cssu1
