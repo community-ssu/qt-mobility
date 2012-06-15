@@ -1,6 +1,3 @@
 usr/lib/libQtMultimediaKit.so.*
-opt/lib/libQtMultimediaKit.so.*
 usr/lib/qt4/plugins/playlistformats 
 usr/lib/qt4/plugins/mediaservice
-opt/lib/qt4/plugins/playlistformats 
-opt/lib/qt4/plugins/mediaservice

@@ -1,67 +1,65 @@
-opt/bin/accel
-opt/bin/arrowkeys
+usr/bin/accel
+usr/bin/arrowkeys
 
-opt/bin/show_acceleration 
-opt/bin/show_compass
-opt/bin/show_magneticflux
-opt/bin/show_orientation
-opt/bin/show_rotation
-opt/bin/grueapp
+usr/bin/show_acceleration 
+usr/bin/show_compass
+usr/bin/show_magneticflux
+usr/bin/show_orientation
+usr/bin/show_rotation
+usr/bin/grueapp
 
-opt/bin/audiodevices
-opt/bin/audioinput
-opt/bin/audiooutput
-opt/bin/audiorecorder
-opt/bin/bearercloud
-opt/bin/bearermonitor
-opt/bin/flickrdemo
-opt/bin/keepintouch
-opt/bin/lightmaps_with_location
-opt/bin/player
-opt/bin/publish-subscribe
-opt/bin/querymessages
-opt/bin/radio
-opt/bin/samplephonebook
-opt/bin/satellitedialog
-opt/bin/serviceactions
-opt/bin/servicebrowser
-opt/bin/sfw-notes
-opt/bin/slideshow
-opt/bin/qsysinfo
-opt/bin/videographicsitem
-opt/bin/videowidget
-opt/bin/weatherinfo_with_location
-opt/bin/writemessage
+usr/bin/audiodevices
+usr/bin/audioinput
+usr/bin/audiooutput
+usr/bin/audiorecorder
+usr/bin/bearercloud
+usr/bin/bearermonitor
+usr/bin/flickrdemo
+usr/bin/keepintouch
+usr/bin/lightmaps_with_location
+usr/bin/player
+usr/bin/publish-subscribe
+usr/bin/querymessages
+usr/bin/radio
+usr/bin/samplephonebook
+usr/bin/satellitedialog
+usr/bin/serviceactions
+usr/bin/servicebrowser
+usr/bin/sfw-notes
+usr/bin/slideshow
+usr/bin/qsysinfo
+usr/bin/videographicsitem
+usr/bin/videowidget
+usr/bin/weatherinfo_with_location
+usr/bin/writemessage
 
 #** Sensor applications **
 #usr/bin/accel (needs root)
 #usr/bin/arrowkeys (needs root)
-opt/bin/cubehouse
-opt/bin/fetchgooglemaps 
+usr/bin/cubehouse
+usr/bin/fetchgooglemaps 
 #reading_perf
 #sensor_explorer
 #usr/bin/servicedbgen
 #usr/bin/servicefw
 #usr/bin/servicexmlgen
-opt/bin/show_als
+usr/bin/show_als
 #usr/bin/show_compass
 #usr/bin/show_magneticflux
 #usr/bin/show_orientation
-opt/bin/show_proximity
+usr/bin/show_proximity
 #usr/bin/show_rotation
 #usr/bin/show_tap
 
-opt/bin/MessagingEx
-opt/bin/smallsensors
+usr/bin/MessagingEx
+usr/bin/smallsensors
 
-opt/bin/xmldata/*
-opt/lib/qt4/plugins/serviceframework
+usr/bin/xmldata/*
 usr/lib/qt4/plugins/serviceframework
-opt/lib/qt4/plugins/sensors/libqtsensors_grueplugin.so 
-usr/lib/qt4/plugins/sensors/libqtsensors_grueplugin.so 
+usr/lib/qt4/plugins/sensors/libqtsensors_grueplugin.so
 
 # ** Things we don't want to have in this package **
-#/opt/bin/grueapp
+#/usr/bin/grueapp
 #icheck
 #qcrmlgen
 #vsexplorer
