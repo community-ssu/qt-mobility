@@ -1,3 +1,9 @@
+qt-mobility (1:1.0.2-maemo4+0m5+0cssu1-thumb1) unstable; urgency=low
+
+  * add kernel errata dependency
+
+ -- Ivaylo Dimitrov <freemangordon@abv.bg>  Fri, 15 Jun 2012 17:16:33 +0300
+
 qt-mobility (1:1.0.2-maemo4+0m5+0cssu1-thumb0) unstable; urgency=low
 
   * Thumb2 build

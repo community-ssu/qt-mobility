@@ -28,7 +28,7 @@ Description: Qt Mobility development files
 Package: libqtm-bearer
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility Bearer module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -44,7 +44,7 @@ Description: Qt Mobility Bearer module
 Package: libqtm-location
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility location module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -60,7 +60,7 @@ Description: Qt Mobility location module
 Package: libqtm-contacts
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility contacts module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -76,7 +76,7 @@ Description: Qt Mobility contacts module
 Package: libqtm-multimedia
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}, n900-fmrx-enabler [arm armel]
+Depends: ${shlibs:Depends}, ${misc:Depends}, n900-fmrx-enabler [arm armel], kernel-feature-errata-430973-workaround
 Description: Qt Mobility multimedia module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -92,7 +92,7 @@ Description: Qt Mobility multimedia module
 Package: libqtm-publishsubscribe
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility publish and subscribe module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -106,7 +106,7 @@ Description: Qt Mobility publish and subscribe module
 Package: libqtm-versit
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility versit module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -122,7 +122,7 @@ Description: Qt Mobility versit module
 Package: libqtm-messaging
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}, qtm-modest-plugin (>= 0.0.2-4)
+Depends: ${shlibs:Depends}, ${misc:Depends}, qtm-modest-plugin (>= 0.0.2-4), kernel-feature-errata-430973-workaround
 Description: Qt Mobility messaging module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -136,7 +136,7 @@ Description: Qt Mobility messaging module
 Package: libqtm-systeminfo
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility system information module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -152,7 +152,7 @@ Description: Qt Mobility system information module
 Package: libqtm-serviceframework
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite
+Depends: ${shlibs:Depends}, ${misc:Depends}, libqt4-sql-sqlite, kernel-feature-errata-430973-workaround
 Replaces: libqtm-dev (<< 1:1.0.2-maemo2) 
 Breaks: libqtm-dev (<< 1:1.0.2-maemo2)
 Description: Qt Mobility service framework module
@@ -170,7 +170,7 @@ Description: Qt Mobility service framework module
 Package: libqtm-sensors
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Description: Qt Mobility sensors framework module
  Qt Mobility Project delivers a set of new APIs to Qt with features that are
  well known from the mobile device world, in particular phones. However, 
@@ -186,7 +186,7 @@ Description: Qt Mobility sensors framework module
 Package: qt-mobility-examples
 Architecture: any
 Section: user/libs
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, kernel-feature-errata-430973-workaround
 Conflicts: libqtm-examples 
 Replaces: libqtm-examples
 Description: Qt Mobility examples 
