@@ -63,6 +63,7 @@
 #include <QNetworkInterface>
 
 #include "qnetworkconfiguration.h"
+#include <stdint.h>
 
 QTM_BEGIN_NAMESPACE
 

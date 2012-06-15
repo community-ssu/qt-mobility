@@ -54,6 +54,7 @@
 
 #include "gconf/gconf-client.h"
 #include "libosso.h"
+#include <stdint.h>
 
 #include <QMap>
 #include <QString>
