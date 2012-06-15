@@ -207,6 +207,8 @@ while [ "$#" -gt 0 ]; do
             ;;
         -maemo5)
             LINUX_TARGET=maemo5
+            QMKSPEC="-spec linux-g++-maemo5"
+            echo "QMAKE_CXXFLAGS += -O2 -fno-omit-frame-pointer -fno-optimize-sibling-calls" >> "$CONFIG_IN"
             ;;
         -maemo6)
             LINUX_TARGET=maemo6
