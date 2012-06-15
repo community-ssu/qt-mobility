@@ -1,3 +1,9 @@
+qt-mobility (1:1.0.2-maemo4+0m5+0cssu1-thumb0) unstable; urgency=low
+
+  * Thumb2 build
+
+ -- Ivaylo Dimitrov <freemangordon@abv.bg>  Fri, 13 Jun 2012 16:32:42 +0300
+
 qt-mobility (1:1.0.2-maemo4+0m5+0cssu1) unstable; urgency=low
 
   * Fixed build under Qt 4.7.4

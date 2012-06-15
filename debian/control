@@ -5,7 +5,7 @@ Maintainer: Antonio Aloisio <antonio.aloisio@nokia.com>
 Build-Depends: libqt4-dev (>= 4.6.0), cdbs, debhelper (>= 5), autotools-dev, quilt, libasound2-dev, libgconf2-dev,
  libosso-abook-dev, libdbus-1-dev, libgconf2-dev, libglib2.0-dev, libsqlite3-dev, liblocation-dev, libgstreamer0.10-dev, 
  libgstreamer-plugins-base0.10-dev, libtpsession-dev (>= 0.1-4), libxml2-dev, libxv-dev, libasound2-dev,
- libconninet0-dev, libconnsettings0-dev, libicd-network-wlan-dev, libbluetooth3-dev, libtelepathy-qt4-dev, libxrandr-dev
+ libconninet0-dev, libconnsettings0-dev, libicd-network-wlan-dev, libbluetooth3-dev, libtelepathy-qt4-dev, libxrandr-dev, gstreamer0.10-plugins-bad-dev, maemo-optify
 Standards-Version: 3.7.2
 
 Package: libqtm-dev
