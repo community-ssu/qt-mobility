@@ -1,4 +1,4 @@
-qt-mobility (1:1.0.2-maemo4+0m5+0cssu1-thumb1) unstable; urgency=low
+qt-mobility (1:1.0.2-maemo4+0m5+0cssu1+thumb1) unstable; urgency=low
 
   * add kernel errata dependency
 
