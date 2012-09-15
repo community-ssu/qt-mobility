@@ -53,6 +53,7 @@
 #include <QtGui/qgraphicsview.h>
 #include <QtGui/qscrollbar.h>
 #include <QtGui/qx11info_x11.h>
+#include <stdint.h>
 
 #include "qgraphicsvideoitem.h"
 

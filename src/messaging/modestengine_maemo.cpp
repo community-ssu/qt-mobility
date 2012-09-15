@@ -67,6 +67,7 @@
 #include </usr/include/sys/inotify.h>
 #include </usr/include/sys/ioctl.h>
 #include </usr/include/sys/fcntl.h>
+#include </usr/include/unistd.h>
 
 // Marshall the ModestStringMap data into a D-Bus argument
 QDBusArgument &operator<<(QDBusArgument &argument,
