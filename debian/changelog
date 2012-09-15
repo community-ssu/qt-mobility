@@ -1,4 +1,10 @@
-qt-mobility (1:1.0.2-maemo4+0m5+0cssu1+thumb1) unstable; urgency=low
+qt-mobility (1:1.0.2-maemo4+0m5+0cssu1+thumb2) unstable; urgency=low
+
+  * add missing includes
+
+ -- Ivaylo Dimitrov <freemangordon@abv.bg>  Sat, 15 Sep 2012 11:15:21 +0300
+
+qt-mobility (1:1.0.2-maemo4+0m5+0cssu1-thumb1) unstable; urgency=low
 
   * add kernel errata dependency
 
